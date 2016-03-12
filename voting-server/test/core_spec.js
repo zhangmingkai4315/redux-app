@@ -27,7 +27,63 @@ describe('application logic',()=>{
 			expect(nextMovieState).to.equal(Map({
 				vote:Map({pair:List.of('Trainspotting','28 Days later')}),
 				entries:List.of('Friends','Atlatis')}));
-		})
+		});
+
+		it('next function will put current winner back to entries',()=>{
+			const state=Map({
+						vote:Map({
+								pair:List.of('Trainspotting','28 Days later'),
+								tally:Map({
+									'Trainspotting':1,
+									'28 Days later':3
+								})
+							}),
+						entries:List.of('Friends','Atlatis')
+					});
+			const nextState=next(state);
+			expect(nextState).to.equal(Map({
+						vote:Map({
+							pair:List.of('Friends','Atlatis')
+						}),
+						entries:List.of('28 Days later')
+					}));
+			});
+
+
+		it('next function will put both winner back to entries',()=>{
+			const state=Map({
+						vote:Map({
+								pair:List.of('Trainspotting','28 Days later'),
+								tally:Map({
+									'Trainspotting':3,
+									'28 Days later':3
+								})
+							}),
+						entries:List.of('Friends','Atlatis')
+					});
+			const nextState=next(state);
+			expect(nextState).to.equal(Map({
+						vote:Map({
+							pair:List.of('Friends','Atlatis')
+						}),
+						entries:List.of('Trainspotting','28 Days later')
+					}));
+			});
+		it('marks winner when just one entry left',()=>{
+			const state=Map({
+						vote:Map({
+								pair:List.of('Trainspotting','28 Days later'),
+								tally:Map({
+									'Trainspotting':3,
+									'28 Days later':2
+								})
+							}),
+						entries:List()
+					});
+			const nextState=next(state);
+			expect(nextState).to.equal(Map({winner:'Trainspotting'}));
+	
+		});
 	});
 
 	describe('core:vote function test',()=>{
