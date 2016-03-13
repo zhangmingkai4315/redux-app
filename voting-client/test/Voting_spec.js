@@ -1,6 +1,8 @@
 import React from 'react/addons'
 import ReactDOM from 'react-dom'
 import Voting from '../src/components/Voting';
+import {List,Map} from 'immutable';
+
 import {expect} from 'chai';
 const {renderIntoDocument,scryRenderedDOMComponentsWithTag,Simulate}
 	  =React.addons.TestUtils;
@@ -61,7 +63,28 @@ describe("Voting components test",()=>{
 		expect(winner.textContent).to.contain('Trainspotting');
 	});
 
+	it('render as a pure component',()=>{
+		const pair=['Trainspotting','28 Days Later'];
+		const component=renderIntoDocument(<Voting pair={pair}/>);
+		let firstButton=scryRenderedDOMComponentsWithTag(component,'button')[0];
+		expect(firstButton.textContent).to.equal('Trainspotting');
+		pair[0]='Sunshine';
+		component.setProps({pair:pair});
+		firstButton=scryRenderedDOMComponentsWithTag(component,'button')[0];
+		expect(firstButton.textContent).to.equal('Trainspotting');
+	});
 
+	it('does update DOM when props changed',()=>{
+		const pair=List.of('Trainspotting','28 Days Later');
+		const component=renderIntoDocument(<Voting pair={pair}/>);
+		let firstButton=scryRenderedDOMComponentsWithTag(component,'button')[0];
+		expect(firstButton.textContent).to.equal('Trainspotting');
+		// pair[0]='Sunshine';
+		const newPair=pair.set(0,'Sunshine');
+		component.setProps({pair:newPair});
+		firstButton=scryRenderedDOMComponentsWithTag(component,'button')[0];
+		expect(firstButton.textContent).to.equal('Sunshine');
+	});
 
 });
 
