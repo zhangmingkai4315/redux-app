@@ -1,2 +1,9 @@
-console.log('I am an voting app');
-console.log("Hello")
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Voting from './components/Voting';
+
+const pair=['Trainspotting','28 Days Later'];
+ReactDOM.render(<Voting pair={pair} 
+						vote={console.log.bind(console)}
+						hasVoted="Trainspotting"/>,
+				document.getElementById('app'));
