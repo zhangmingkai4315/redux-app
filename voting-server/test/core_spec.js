@@ -88,37 +88,27 @@ describe('application logic',()=>{
 
 	describe('core:vote function test',()=>{
 		describe('a vote call will add tally for vote results',()=>{
-			const states=Map({
-				vote:Map({pair:List.of('Trainspotting','28 Days later')}),
-				entries:List.of('Friends','Atlatis')});
-			expect(vote(states,'Trainspotting')).to.equal(Map({
-					vote:Map({pair:List.of('Trainspotting','28 Days later')
+			const states=Map({pair:List.of('Trainspotting','28 Days later')});
+
+			expect(vote(states,'Trainspotting')).to.equal(Map({pair:List.of('Trainspotting','28 Days later')
 						,tally:Map({
 						'Trainspotting':1
-					})}),
-					entries:List.of('Friends','Atlatis')
-					}));
+					})}));
 		});
 
 		describe('Add tally when vote this item again',()=>{
 			const states=Map({
-				vote:Map({
 						pair:List.of('Trainspotting','28 Days later'),
 						tally:Map({
 								'Trainspotting':1
 						})
-					}),
-					entries:List.of('Friends','Atlatis'),
 					});
 			expect(vote(states,'Trainspotting')).to.equal(Map({
-					vote:Map({
 							pair:List.of('Trainspotting','28 Days later'),
 							tally:Map({
 							'Trainspotting':2
 							})
-						}),
-					entries:List.of('Friends','Atlatis'),
-					}));
+				}));
 		});
 	})
 });

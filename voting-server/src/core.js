@@ -1,6 +1,8 @@
 
 import {List,Map} from 'immutable'
 // 函数将返回一对键为entries，值为newEntries的Map结构 
+
+export const INITIAL_STATE=Map()
 export function setEntries(states,newEntries){
 	return states.set("entries",List(newEntries));
 }	
@@ -17,7 +19,7 @@ export function next(states){
 }
 
 export function vote(states,entry){
-	return states.updateIn(['vote','tally',entry],0,tally=>tally+1)
+	return states.updateIn(['tally',entry],0,tally=>tally+1)
 }
 
 export function getWinner(vote){
