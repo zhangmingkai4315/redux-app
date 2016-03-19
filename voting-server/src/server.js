@@ -6,6 +6,8 @@ export default function startServer(store){
 	// dispatched, and some part of the state tree may potentially
 	// have changed. You may then call getState() to read the current
 	// state tree inside the callback.
+
+	//绑定事件发生器 一旦状态改变则通知所有的客户端
 	store.subscribe(()=>{
 		io.emit('state',store.getState().toJS());
 	});
@@ -14,6 +16,4 @@ export default function startServer(store){
 		socket.emit('state',store.getState().toJS());
 		socket.on('action',store.dispatch.bind(store));
 	});
-
-
 }
