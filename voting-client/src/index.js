@@ -5,27 +5,18 @@ import {ResultContainer} from './components/Results';
 import Router,{Route} from 'react-router'
 import App from './components/App'
 // import * from "module";
+import {setState} from './action_creators';
+import io from 'socket.io-client';
 import reducer from './reducer';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 
 
 const store=createStore(reducer);
-store.dispatch({
-	type:'SET_STATE',
-	state:{
-		vote:{
-			pair:[
-				'Sunshine',
-				'28 days later'
-			],
-			tally:{Sunshine:2}
-		}
-	}
-});
-
-
-
+const socket=io(`${location.protocol}//${location.hostname}:8090`);
+socket.on('state',state=>
+	store.dispatch(setState(state))
+);
 const pair=['Trainspotting','28 Days Later'];
 
 const routes=<Route component={App}>
