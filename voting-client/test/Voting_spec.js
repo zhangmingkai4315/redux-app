@@ -1,6 +1,6 @@
 import React from 'react/addons'
 import ReactDOM from 'react-dom'
-import Voting from '../src/components/Voting';
+import {Voting} from '../src/components/Voting';
 import {List,Map} from 'immutable';
 
 import {expect} from 'chai';
@@ -87,4 +87,3 @@ describe("Voting components test",()=>{
 	});
 
 });
-

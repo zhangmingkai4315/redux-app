@@ -14,3 +14,7 @@ Object.keys(window).forEach((key)=>{
 })
 
 
+//使用chai 来比较immutable data
+import chai from "chai"
+import chaiImmutable from "chai-Immutable"
+chai.use(chaiImmutable);
