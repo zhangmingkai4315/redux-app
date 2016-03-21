@@ -2,6 +2,8 @@ import React from 'react';
 import Winner from './Winner'
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {connect} from 'react-redux';
+import * as actionCreator from '../action_creators';
+
 
 function mapStateToProps(state){
   return {
@@ -40,4 +42,4 @@ export const Results= React.createClass({
 })
 
 
-export const ResultContainer=connect(mapStateToProps)(Results);
+export const ResultContainer=connect(mapStateToProps,actionCreator)(Results);
