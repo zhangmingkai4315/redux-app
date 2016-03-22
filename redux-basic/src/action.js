@@ -1,6 +1,7 @@
 export const ADD_TODO='ADD_TODO';
 export const COMPLETE_TODO='COMPLETE_TODO';
 export const SET_VISIBILITY_FILTER='SET_VISIBILITY_FILTER';
+export const TOGGLE_TODO='TOGGLE_TODO';
 
 let nextTodoId=0;
 
@@ -28,8 +29,9 @@ export function completeTodo(index){
 };
 
 export const toggleTodo=(id)=>{
+	// console.log('toggle:'+id);
 	return {
-		type:'TOGGLE_TODO',
+		type:TOGGLE_TODO,
 		id,
 	}
 }
